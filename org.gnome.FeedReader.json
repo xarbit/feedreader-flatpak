@@ -1,0 +1,52 @@
+{
+    "app-id": "org.gnome.FeedReader",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.20",
+    "sdk": "org.gnome.Sdk",
+    "command": "feedreader",
+    "rename-desktop-file": "feedreader.desktop",
+    "rename-icon": "feedreader",
+    "copy-icon": true,
+    "finish-args": [
+        "--filesystem=home",
+        "--share=ipc",
+	"--socket=x11",
+	"--socket=wayland",
+        "--share=network"
+    ],
+    "modules": [
+        {
+            "name": "gee",
+            "config-opts": ["--disable-introspection"],
+            "sources" : [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libgee/0.18/libgee-0.18.1.tar.xz",
+                    "sha256": "99686bbe5a9c89ba9502c25f61314ee8efa0dd2a1159c9a639afc1458c2839a2"
+                }
+            ]
+        },
+        {
+            "name": "rest",
+            "config-opts": ["--disable-introspection", "--disable-gtk-doc" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.0.tar.xz",
+                    "sha256": "e7b89b200c1417073aef739e8a27ff2ab578056c27796ec74f5886a5e0dff647"
+                }
+            ]
+        },
+	{
+            "name": "feedreader",
+	    "cmake": true,
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/jangernert/FeedReader/archive/v1.6.2.tar.gz",
+                    "sha256": "c9ddb59d14a2cb04d00db07fcd90f3de07f9ae1f2fb0f21783db8e9a242991ed"
+                }
+            ]
+        }
+    ]
+}
