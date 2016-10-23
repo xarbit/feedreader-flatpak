@@ -1,5 +1,5 @@
 {
-    "app-id": "org.gnome.FeedReader",
+    "app-id": "org.gnome.feedreader",
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.20",
     "sdk": "org.gnome.Sdk",
@@ -7,6 +7,7 @@
     "rename-desktop-file": "feedreader.desktop",
     "rename-icon": "feedreader",
     "copy-icon": true,
+    "desktop-file-name-prefix": "(Flatpak) ",
     "finish-args": [
         "--filesystem=home",
         "--share=ipc",
@@ -28,8 +29,13 @@
     },
     "modules": [
         {
-            "name": "gee",
-            "config-opts": ["--disable-introspection"],
+            "name": "libgee",
+            "build-options" : {
+                "env": {
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
+                }
+            },
             "sources" : [
                 {
                     "type": "archive",
@@ -41,6 +47,12 @@
         {
             "name": "rest",
             "config-opts": ["--disable-introspection", "--disable-gtk-doc" ],
+	    "build-options" : {
+                "env": {
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
+                }
+            },
             "sources": [
                 {
                     "type": "archive",
@@ -57,6 +69,17 @@
                     "type": "archive",
                     "url": "https://github.com/jangernert/FeedReader/archive/v1.6.2.tar.gz",
                     "sha256": "c9ddb59d14a2cb04d00db07fcd90f3de07f9ae1f2fb0f21783db8e9a242991ed"
+                }
+            ]
+        },
+	 {
+            "name": "rename-servicefile",
+            "no-autogen": true,
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "patches/rename-servicefile/Makefile",
+                    "dest-filename": "Makefile"
                 }
             ]
         }
