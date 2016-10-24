@@ -9,13 +9,20 @@
     "copy-icon": true,
     "desktop-file-name-prefix": "(Flatpak) ",
     "finish-args": [
-        "--filesystem=home",
+        "--filesystem=home:rw",
+	/* Play sounds */
+        "--socket=pulseaudio",
+        /* Access to feedreader configuration and cache files */
+        "--filesystem=~/.cache/feedreader", "--filesystem=~/.local/share/feedreader",
         "--share=ipc",
 	"--socket=x11",
 	"--socket=wayland",
 	"--socket=system-bus",
 	"--socket=session-bus",
-        "--share=network"
+        "--share=network",
+	/* Needed for dconf to work */
+        "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
     "build-options" : {
         "cflags": "-O2 -g",
@@ -70,17 +77,9 @@
                     "url": "https://github.com/jangernert/FeedReader/archive/v1.6.2.tar.gz",
                     "sha256": "c9ddb59d14a2cb04d00db07fcd90f3de07f9ae1f2fb0f21783db8e9a242991ed"
                 }
-            ]
-        },
-	 {
-            "name": "rename-servicefile",
-            "no-autogen": true,
-            "sources": [
-                {
-                    "type": "file",
-                    "path": "patches/rename-servicefile/Makefile",
-                    "dest-filename": "Makefile"
-                }
+            ],
+	    "post-install": [
+                "mv /app/share/dbus-1/services/feedreader.service /app/share/dbus-1/services/org.gnome.feedreader.service"
             ]
         }
     ]
