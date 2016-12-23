@@ -114,9 +114,6 @@
                     "type": "archive",
                     "url": "https://github.com/jscurtu/FeedReader/archive/master.zip",
                     "sha256": "b30023e6d4fb552e0bd8e8b40d4e6a587810fbb34a9ea2d962e08490636a818d"
-                }, {
-                    "type": "patch",
-                    "path": "patches/install-appdata.patch"
                 }
                 // FIX ME
                 //, {
