@@ -4,39 +4,36 @@
     "runtime-version": "3.22",
     "sdk": "org.gnome.Sdk",
     "command": "feedreader",
+    "rename-appdata-file": "feedreader.appdata.xml",
     "rename-desktop-file": "feedreader.desktop",
     "rename-icon": "feedreader",
     "copy-icon": true,
     "desktop-file-name-prefix": "(Flatpak) ",
     "finish-args": [
-        "--filesystem=home:rw",
-	/* Play sounds */
+        /* Play sounds */
         "--socket=pulseaudio",
         /* Access to feedreader configuration and cache files */
-        "--filesystem=~/.cache/feedreader", "--filesystem=~/.local/share/feedreader",
         "--share=ipc",
-	"--socket=x11",
-	"--socket=wayland",
-	"--socket=system-bus",
-	"--socket=session-bus",
+        "--socket=x11",
+        "--socket=wayland",
         "--share=network",
-	/* Needed for dconf to work */
+        /* Needed for dconf to work */
         "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
-        "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+        "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+
+        "--own-name=org.gnome.FeedReader",
+        "--own-name=org.gnome.feedreader.FeedReaderArticleView",
+        "--talk-name=org.freedesktop.Notifications",
+        "--talk-name=org.freedesktop.secrets"
     ],
     "build-options" : {
-        "cflags": "-O2 -g",
-        "cxxflags": "-O2 -g",
-        "env": {
-            "V": "1"
-        },
-        "build-args": [
-            "--share=network"
-        ]
+        "cflags": "-O2 -g -w",
+        "cxxflags": "-O2 -g"
     },
     "modules": [
         {
             "name": "libgee",
+            "cleanup": [ "/include", "*.la", "/lib/pkgconfig", "/share" ],
             "build-options" : {
                 "env": {
                     "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
@@ -53,8 +50,9 @@
         },
         {
             "name": "rest",
-            "config-opts": ["--disable-introspection", "--disable-gtk-doc" ],
-	    "build-options" : {
+            "config-opts": ["--disable-introspection", "--disable-gtk-doc", "--disable-gtk-doc-html" ],
+            "cleanup": [ "/include", "*.la", "/lib/pkgconfig", "/share" ],
+            "build-options" : {
                 "env": {
                     "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
                     "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
@@ -68,17 +66,25 @@
                 }
             ]
         },
-	{
+        {
             "name": "feedreader",
-	    "cmake": true,
+            "cmake": true,
             "sources": [
                 {
                     "type": "archive",
                     "url": "https://github.com/jangernert/FeedReader/archive/v1.6.2.tar.gz",
                     "sha256": "c9ddb59d14a2cb04d00db07fcd90f3de07f9ae1f2fb0f21783db8e9a242991ed"
+                },
+                {
+                    "type": "patch",
+                    "path": "patches/install-appdata.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "patches/use-correct-data-dir.patch"
                 }
             ],
-	    "post-install": [
+            "post-install": [
                 "mv /app/share/dbus-1/services/feedreader.service /app/share/dbus-1/services/org.gnome.feedreader.service"
             ]
         }
