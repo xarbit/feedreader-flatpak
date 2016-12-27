@@ -75,38 +75,7 @@
                 "url": "https://download.gnome.org/sources/libpeas/1.20/libpeas-1.20.0.tar.xz",
                 "sha256": "f392fffe2dc00072a51bb2a1b274224a06bdc5f9c3b3c0ac4816909e9933d354"
             }]
-        }, {
-            "name": "telepathy-glib",
-            "config-opts": ["--disable-introspection", "--disable-gtk-doc", "--disable-gtk-doc-html"],
-	    "cleanup": ["*.la", "/lib/pkgconfig"],
-            "build-options": {
-                "env": {
-                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
-                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
-                }
-            },
-            "sources": [{
-                "type": "archive",
-                "url": "https://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz",
-                "sha256": "9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb"
-            }]
-        }, {
-            "name": "goa",
-            "config-opts": ["--disable-gtk-doc", "--disable-gtk-doc-html"],
-	    "cleanup": ["*.la", "/lib/pkgconfig"],
-            "build-options": {
-                "env": {
-                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
-                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
-                }
-            },
-            "sources": [{
-                "type": "archive",
-                "url": "https://download.gnome.org/sources/gnome-online-accounts/3.22/gnome-online-accounts-3.22.3.tar.xz",
-                "sha256": "0bef86988f38e4b1a46c778ad160c4470c2197d75a4267966d5a5938a0b39b8f"
-            }]
         },
-
         {
             "name": "feedreader",
             "cmake": true,
@@ -114,7 +83,11 @@
             "sources": [{
                     "type": "git",
                     "url": "https://github.com/jangernert/FeedReader.git"
-                }
+                },
+		{
+                    "type": "patch",
+                    "path": "patches/disable-goa.patch"
+                }	
             ],
             "post-install": [
                 "mv /app/share/dbus-1/services/feedreader.service /app/share/dbus-1/services/org.gnome.feedreader.service"
