@@ -1,0 +1,99 @@
+diff -Naur FeedReader/CMakeLists.txt FeedReader.patch/CMakeLists.txt
+--- FeedReader/CMakeLists.txt	2016-12-27 08:55:47.731196209 +0100
++++ FeedReader.patch/CMakeLists.txt	2016-12-27 13:56:57.313641773 +0100
+@@ -53,8 +53,7 @@
+ 	gstreamer-1.0
+ 	gstreamer-pbutils-1.0
+ 	libpeas-1.0
+-	libcurl
+-	goa-1.0)
++	libcurl)
+ 
+ if(LIBUNITY_FOUND)
+ 	list(APPEND MODULES unity)
+@@ -126,8 +125,7 @@
+ 	WebKit2-4.0
+ 	gstreamer-1.0
+ 	gstreamer-pbutils-1.0
+-	libpeas-1.0
+-	goa-1.0)
++	libpeas-1.0)
+ 
+ vala_precompile(UI ${UI_NAME}
+ 	src/DBusConnection.vala
+diff -Naur FeedReader/plugins/share/CMakeLists.txt FeedReader.patch/plugins/share/CMakeLists.txt
+--- FeedReader/plugins/share/CMakeLists.txt	2016-12-27 08:55:47.801196260 +0100
++++ FeedReader.patch/plugins/share/CMakeLists.txt	2016-12-27 14:00:31.825934054 +0100
+@@ -1,6 +1,6 @@
+ option(EMAIL "Enable Email plugin" ON)
+ option(INSTAPAPER "Enable Instapaper plugin" ON)
+-option(POCKET "Enable Pocket plugin" ON)
++option(POCKET "Enable Pocket plugin" OFF)
+ option(TWITTER "Enable Twitter plugin" ON)
+ option(WALLABAG "Enable Wallabag plugin" ON)
+ 
+diff -Naur FeedReader/src/Share/share.vala FeedReader.patch/src/Share/share.vala
+--- FeedReader/src/Share/share.vala	2016-12-27 08:55:47.810196266 +0100
++++ FeedReader.patch/src/Share/share.vala	2016-12-27 14:21:28.328675977 +0100
+@@ -18,7 +18,7 @@
+ 	private Gee.ArrayList<ShareAccount> m_accounts;
+ 	private Peas.ExtensionSet m_plugins;
+ 	private static Share? m_share = null;
+-	private Goa.Client? m_client = null;
++	//private Goa.Client? m_client = null;
+ 
+ 	public static Share get_default()
+ 	{
+@@ -46,7 +46,7 @@
+ 
+ 		//m_plugins.extension_removed.connect((info, extension) => {});
+ 
+-		checkSystemAccounts();
++		//checkSystemAccounts();
+ 
+ 		foreach(var plugin in engine.get_plugin_list())
+ 		{
+@@ -255,40 +255,14 @@
+ 
+ 	private void checkSystemAccounts()
+ 	{
+-		try
+-		{
+-			m_client = new Goa.Client.sync();
+-			if(m_client != null)
+-			{
+-				m_client.account_added.connect((obj) => {
+-					Logger.debug("share: account added");
+-					accountsChanged(obj);
+-				});
+-				m_client.account_changed.connect((obj) => {
+-					Logger.debug("share: account changed");
+-					accountsChanged(obj);
+-				});
+-				m_client.account_removed.connect((obj) => {
+-					Logger.debug("share: account removed");
+-					accountsChanged(obj);
+-				});
+-			}
+-			else
+-			{
+-				Logger.error("share: goa not available");
+-			}
+-		}
+-		catch(GLib.Error e)
+-		{
+-			Logger.error("share.checkSystemAccounts: %s".printf(e.message));
+-		}
++		Logger.error("share: goa not available");
+ 	}
+ 
+-	private void accountsChanged(Goa.Object object)
++	/*private void accountsChanged(Goa.Object object)
+ 	{
+ 		refreshAccounts();
+ 		var window = ((FeedApp)GLib.Application.get_default()).getWindow();
+ 		if(window != null)
+ 			window.settingsRefreshAccounts();
+-	}
++	}*/
+ }
