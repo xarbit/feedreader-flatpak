@@ -79,12 +79,11 @@
 	{
             "name": "gnome-online-accounts",
             "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend"],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "git://git.gnome.org/gnome-online-accounts"
-                }
-            ]
+            "sources": [{
+                "type": "archive",
+                "url": "https://download.gnome.org/sources/gnome-online-accounts/3.22/gnome-online-accounts-3.22.3.tar.xz",
+                "sha256": "0bef86988f38e4b1a46c778ad160c4470c2197d75a4267966d5a5938a0b39b8f"
+            }]
 	},
         {
             "name": "feedreader",
