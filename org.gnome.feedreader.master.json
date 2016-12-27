@@ -112,9 +112,8 @@
             "cmake": true,
 	    "config-opts": ["-DCMAKE_INSTALL_PREFIX=/app"],
             "sources": [{
-                    "type": "archive",
-                    "url": "https://github.com/jscurtu/FeedReader/archive/master.zip",
-                    "sha256": "f5f3d304e2ee3c50a94c9bdd541202fbcb8e64ea3439ef893975922f2c1746e3"
+                    "type": "git",
+                    "url": "https://github.com/jangernert/FeedReader.git"
                 }
             ],
             "post-install": [
