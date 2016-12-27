@@ -76,6 +76,16 @@
                 "sha256": "f392fffe2dc00072a51bb2a1b274224a06bdc5f9c3b3c0ac4816909e9933d354"
             }]
         },
+	{
+            "name": "gnome-online-accounts",
+            "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gnome-online-accounts"
+                }
+            ]
+	},
         {
             "name": "feedreader",
             "cmake": true,
@@ -83,10 +93,6 @@
             "sources": [{
                     "type": "git",
                     "url": "https://github.com/jangernert/FeedReader.git"
-                },
-		{
-                    "type": "patch",
-                    "path": "patches/disable-goa.patch"
                 }	
             ],
             "post-install": [
