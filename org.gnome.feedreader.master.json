@@ -62,8 +62,8 @@
             }]
         }, {
             "name": "libpeas",
-            "config-opts": ["--disable-introspection", "--disable-gtk-doc", "--disable-gtk-doc-html"],
-            "cleanup": ["/include", "*.la", "/lib/pkgconfig", "/share"],
+            "config-opts": ["--disable-introspection", "--disable-gtk-doc", "--disable-gtk-doc-html", "--disable-gtk"],
+	    "cleanup": ["/include", "*.la", "/lib/pkgconfig"],
             "build-options": {
                 "env": {
                     "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
@@ -78,7 +78,7 @@
         }, {
             "name": "telepathy-glib",
             "config-opts": ["--disable-introspection", "--disable-gtk-doc", "--disable-gtk-doc-html"],
-            "cleanup": ["/include", "*.la", "/lib/pkgconfig", "/share"],
+	    "cleanup": ["*.la", "/lib/pkgconfig"],
             "build-options": {
                 "env": {
                     "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
@@ -93,7 +93,7 @@
         }, {
             "name": "goa",
             "config-opts": ["--disable-gtk-doc", "--disable-gtk-doc-html"],
-            "cleanup": ["/include", "*.la", "/lib/pkgconfig", "/share"],
+	    "cleanup": ["*.la", "/lib/pkgconfig"],
             "build-options": {
                 "env": {
                     "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
@@ -110,16 +110,12 @@
         {
             "name": "feedreader",
             "cmake": true,
+	    "config-opts": ["-DCMAKE_INSTALL_PREFIX=/app"],
             "sources": [{
                     "type": "archive",
                     "url": "https://github.com/jscurtu/FeedReader/archive/master.zip",
-                    "sha256": "b30023e6d4fb552e0bd8e8b40d4e6a587810fbb34a9ea2d962e08490636a818d"
+                    "sha256": "f5f3d304e2ee3c50a94c9bdd541202fbcb8e64ea3439ef893975922f2c1746e3"
                 }
-                // FIX ME
-                //, {
-                //     "type": "patch",
-                //     "path": "patches/use-correct-data-dir.patch"
-                // }
             ],
             "post-install": [
                 "mv /app/share/dbus-1/services/feedreader.service /app/share/dbus-1/services/org.gnome.feedreader.service"
