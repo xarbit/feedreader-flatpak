@@ -68,11 +68,12 @@
         {
             "name": "feedreader",
             "cmake": true,
+            "config-opts": ["-DCMAKE_INSTALL_PREFIX=/app"],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://github.com/jangernert/FeedReader/archive/v1.6.2.tar.gz",
-                    "sha256": "c9ddb59d14a2cb04d00db07fcd90f3de07f9ae1f2fb0f21783db8e9a242991ed"
+                    "type": "git",
+                    "url": "https://github.com/jangernert/FeedReader.git",
+		            "branch":"stable"
                 },
                 {
                     "type": "patch",
