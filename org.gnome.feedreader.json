@@ -1,5 +1,6 @@
 {
     "app-id": "org.gnome.feedreader",
+    "version": "1.6.2",
     "branch": "stable",
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.22",
