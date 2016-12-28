@@ -73,7 +73,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/jangernert/FeedReader.git",
-		            "branch":"stable"
+		    "branch":"stable"
                 },
                 {
                     "type": "patch",
