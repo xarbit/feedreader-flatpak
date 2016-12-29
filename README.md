@@ -14,15 +14,15 @@ For FeedReader to properly work, you will also need to install the following por
 When all set, download the flatpak'd standalone bundle here:
 
 ### Stable
-- [FeedReader 1.6.2 Flatpak](https://github.com/jscurtu/feedreader-flatpak/releases/download/stable/feedreader.flatpak)
+- [FeedReader 1.6.2 Flatpak](https://github.com/jscurtu/feedreader-flatpak/releases/tag/1.6.2/)
 
-### Snapshot 20161227
-- [FeedReader 2.0-dev Flatpak](https://github.com/jscurtu/feedreader-flatpak/releases/download/snapshot-20161227/feedreader-2.0-dev.flatpak)
+### Snapshot
+- [FeedReader 2.0-dev Flatpak](https://github.com/jscurtu/feedreader-flatpak/releases/tag/snapshot-20161229/)
 
 GNOME-Software can handle flatpak bundles, just open the downloaded feedreader.flatpak file with GNOME-Software and click on install. Thats it..
 
 You can also install the feedreader.flatpak from the commandline as so:
 
 <pre>
-	$ flatpak install --bundle feedreader.flatpak
+	$ flatpak install --bundle feedreader-stable-(DATE).x86_64.flatpak
 </pre>
