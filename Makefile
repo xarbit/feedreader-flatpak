@@ -1,5 +1,12 @@
-all:
-	flatpak-builder --force-clean --repo=repo feedreader org.gnome.feedreader.json
+PACKAGE   = feedreader
+JSON	  = org.gnome.feedreader.json
+ARCH	  = x86_64
+BRANCH	  = master
+VERSION   = $(BRANCH)-` date +"%Y%m%d" `
+BUNDLE 	  = $(PACKAGE)-$(VERSION).$(ARCH)
 
-installer:
-	flatpak build-bundle repo/ feedreader.flatpak org.gnome.feedreader
+all:
+	rm -rf $(PACKAGE)
+	flatpak-builder --force-clean --repo=repo $(PACKAGE) $(JSON)
+dist:
+	flatpak build-bundle repo/ $(BUNDLE).flatpak org.gnome.$(PACKAGE) $(BRANCH)
