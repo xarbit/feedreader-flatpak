@@ -1,28 +1,5 @@
 # feedreader-flatpak
 
-#### Flatpak Bundle (testing) 
+I merged this with upstream, please get the latest build here:
+https://github.com/jangernert/FeedReader/releases
 
-FeedReader is now availble as a standalone Flatpak file and should be installable on all Linux distributions that support the Flatpak Application Framework. This is still a WIP and might not work as expected, please report any Flatpak related issues.
-
-For more information about Flatpak and how to use or install it for your distribution see the [Flatpak webpage](http://flatpak.org).
-
-For FeedReader to properly work, you will also need to install the following portal packages, look in your distributions packagemanager:
-
-- xdg-desktop-portal 
-- xdg-desktop-portal-gtk
-
-When all set, download the flatpak'd standalone bundle here:
-
-### Stable
-- [FeedReader 1.6.2 Flatpak](https://github.com/jscurtu/feedreader-flatpak/releases/tag/1.6.2/)
-
-### Snapshot
-- [FeedReader 2.0-dev Flatpak](https://github.com/jscurtu/feedreader-flatpak/releases/tag/snapshot-20161229/)
-
-GNOME-Software can handle flatpak bundles, just open the downloaded feedreader.flatpak file with GNOME-Software and click on install. Thats it..
-
-You can also install the feedreader.flatpak from the commandline as so:
-
-<pre>
-	$ flatpak install --bundle feedreader-stable-(DATE).x86_64.flatpak
-</pre>
